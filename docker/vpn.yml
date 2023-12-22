@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  vpn:
+    image: qmcgaw/gluetun
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+      - ${RADARR_PORT:-7878}:7878 # Radarr
+      - ${SONARR_PORT:-8989}:8989 # Sonarr
+      - ${PROWLARR_PORT:-9696}:9696 # Prowlarr
+      - ${TRANSMISSION_PORT:-9091}:9091 # Transmission
+      - ${FIREFOX_PORT:-5800}:5800 # Firefox
+    volumes:
+      - ../config/gluetun:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=windscribe
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
+    healthcheck:
+      test: ping -c 1 www.google.com || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

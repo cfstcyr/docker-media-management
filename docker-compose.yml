@@ -1,0 +1,63 @@
+version: '3.3'
+
+services:
+  # ========================
+  # VPN
+  # ========================
+
+  vpn:
+    extends:
+      file: ./docker/vpn.yml
+      service: vpn
+
+  # ========================
+  # Management
+  # ========================
+
+  radarr:
+    extends:
+      file: ./docker/management.yml
+      service: radarr
+
+  sonarr:
+    extends:
+      file: ./docker/management.yml
+      service: sonarr
+
+  prowlarr:
+    extends:
+      file: ./docker/management.yml
+      service: prowlarr
+
+  # ========================
+  # Media
+  # ========================
+
+  plex:
+    extends:
+      file: ./docker/media.yml
+      service: plex
+
+  # ========================
+  # Tools
+  # ========================
+
+  homepage:
+    extends:
+      file: ./docker/tools.yml
+      service: homepage
+
+  firefox:
+    extends:
+      file: ./docker/tools.yml
+      service: firefox
+  
+  traefik:
+    extends:
+      file: ./docker/tools.yml
+      service: traefik
+
+  transmission:
+    extends:
+      file: ./docker/tools.yml
+      service: transmission

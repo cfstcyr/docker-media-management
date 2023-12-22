@@ -1,0 +1,7 @@
+.env
+
+config/*/*
+!config/*/.gitkeep
+!config/homepage/templates
+
+.DS_Store

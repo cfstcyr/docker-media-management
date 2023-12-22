@@ -1,0 +1,75 @@
+version: '3.3'
+
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    environment:
+      - HostPUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/radarr:/config
+      - ${LIBRARY_MOVIES_PATH:-~/Movies/Plex/Movies}:/movies #optional
+      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`${RADARR_SUBDOMAIN:-movie.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      - homepage.group=Management
+      - homepage.name=Radarr
+      - homepage.icon=radarr.png
+      - homepage.href=http://${RADARR_SUBDOMAIN:-movie.media}.${DOMAIN:-localhost}
+      - homepage.description=Movies management
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    environment:
+      - HostPUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/sonarr:/config
+      - ${LIBRARY_TV_PATH:-~/Movies/Plex/TV}:/tv #optional
+      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`${SONARR_SUBDOMAIN:-tv.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - homepage.group=Management
+      - homepage.name=Sonarr
+      - homepage.icon=sonarr.png
+      - homepage.href=http://${SONARR_SUBDOMAIN:-tv.media}.${DOMAIN:-localhost}
+      - homepage.description=TV shows management
+    restart: unless-stopped
+  
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    environment:
+      - HostPUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/prowlarr:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.rule=Host(`${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=8989"
+      - homepage.group=Management
+      - homepage.name=Prowlarr
+      - homepage.icon=prowlarr.png
+      - homepage.href=http://${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}
+      - homepage.description=Indexer management
+    restart: unless-stopped

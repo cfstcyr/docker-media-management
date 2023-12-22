@@ -1,0 +1,97 @@
+version: '3.3'
+
+services:
+  traefik:
+    image: traefik:v2.5
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - ${TRAEFIK_PORT:-80}:80
+      - ${TRAEFIK_DASHBOARD_PORT:-8080}:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - homepage.group=Tools
+      - homepage.name=Traefik
+      - homepage.icon=traefik.png
+      - homepage.href=http://localhost:8080/
+      - homepage.description=Reverse proxy
+    healthcheck:
+      test: [ "CMD", "traefik", "healthcheck", "--ping" ]
+      interval: 5s
+      retries: 10
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      PUID: 1000
+      PGID: 1000
+      HOMEPAGE_VAR_TITLE: Medias
+    ports:
+      - ${HOMEPAGE_PORT:-6900}:3000
+    volumes:
+      - ../config/homepage:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: [sh, -c, "cp -n -u /app/config/templates/*.yaml /app/config && node server.js"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`${HOME_SUBDOMAIN:-media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+    restart: unless-stopped
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    environment:
+      - HostPUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+      - DOCKER_MODS=linuxserver/mods:transmission-transmissionic
+    volumes:
+      - ../config/transmission:/config
+      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.transmission.rule=Host(`${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+      - homepage.group=Tools
+      - homepage.name=Transmission
+      - homepage.icon=transmission.png
+      - homepage.href=http://${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}
+      - homepage.description=Download client
+    restart: unless-stopped
+
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    depends_on:
+      - vpn
+    security_opt:
+      - seccomp:unconfined
+    network_mode: service:vpn
+    environment:
+      - HostPUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+      - CUSTOM_PORT=5800
+    volumes:
+      - ../config/firefox:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.firefox.rule=Host(`${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.firefox.loadbalancer.server.port=5800"
+      - homepage.group=Tools
+      - homepage.name=Firefox
+      - homepage.icon=firefox.png
+      - homepage.href=http://${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}
+      - homepage.description=Web browser
+    shm_size: "1gb"
+    restart: unless-stopped
