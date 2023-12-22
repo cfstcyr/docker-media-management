@@ -14,6 +14,7 @@ Applications for using media.
 | Application | Description | Default URL | Default port |
 | ----------- | ----------- | ----------- | ------------ |
 | [Plex](https://www.plex.tv/) | Media server | http://plex.media.localhost | 32400 |
+| [Tautulli](https://tautulli.com/) | Plex monitoring | http://tautulli.media.localhost | 8181 |
 
 ### Management
 
@@ -91,6 +92,7 @@ The `.env` file contains the environment variables for the containers.
 | `DOMAIN` | Domain name to access the applications | `localhost` |
 | `HOME_SUBDOMAIN` | Subdomain for the home page | `media` |
 | `PLEX_SUBDOMAIN` | Subdomain for Plex | `plex.media` |
+| `TAUTULLI_SUBDOMAIN` | Subdomain for Tautulli | `tautulli.media` |
 | `RADARR_SUBDOMAIN` | Subdomain for Radarr | `radarr.media` |
 | `SONARR_SUBDOMAIN` | Subdomain for Sonarr | `sonarr.media` |
 | `PROWLARR_SUBDOMAIN` | Subdomain for Prowlarr | `prowlarr.media` |

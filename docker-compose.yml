@@ -38,6 +38,11 @@ services:
       file: ./docker/media.yml
       service: plex
 
+  tautulli:
+    extends:
+      file: ./docker/media.yml
+      service: tautulli
+
   # ========================
   # Tools
   # ========================
