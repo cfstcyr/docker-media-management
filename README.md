@@ -98,5 +98,15 @@ The `.env` file contains the environment variables for the containers.
 | `PROWLARR_SUBDOMAIN` | Subdomain for Prowlarr | `prowlarr.media` |
 | `TRANSMISSION_SUBDOMAIN` | Subdomain for Transmission | `download.media` |
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
+| `TRAEFIK_PORT` | Port for Traefik | `80` |
+| `TRAEFIK_DASHBOARD_PORT` | Port for Traefik dashboard | `8080` |
+| `HOMEPAGE_PORT` | Port for the home page | `6900` |
+| `PLEX_PORT` | Port for Plex | `32400` |
+| `TAUTULLI_PORT` | Port for Tautulli | `8181` |
+| `RADARR_PORT` | Port for Radarr | `7878` |
+| `SONARR_PORT` | Port for Sonarr | `8989` |
+| `PROWLARR_PORT` | Port for Prowlarr | `9696` |
+| `TRANSMISSION_PORT` | Port for Transmission | `9091` |
+| `FIREFOX_PORT` | Port for Firefox | `5800` |
 
 > `*` Required variables
