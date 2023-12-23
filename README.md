@@ -51,7 +51,6 @@ Applications for managing media.
 | [Sonarr](https://sonarr.tv/) | TV management | http://sonarr.media.localhost | 8989 |
 | [Prowlarr](https://prowlarr.com/) | Indexer management | http://prowlarr.media.localhost | 9696 |
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
-| [Firefox](https://docs.linuxserver.io/images/docker-firefox/) | Browser | http://browser.media.localhost | 5800 |
 
 #### Tools
 
@@ -59,7 +58,7 @@ Applications for managing media.
 | ----------- | ----------- | ----------- | ------------ |
 | [Home page](https://gethomepage.dev/v0.8.3/) | Home page | http://media.localhost | 6900 |
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
-| [Firefox](https://docs.linuxserver.io/images/docker-firefox/) | Browser | http://browser.media.localhost | 5800 |
+| [Firefox](https://docs.linuxserver.io/images/docker-firefox/) `optional` | Browser | http://browser.media.localhost | 5800 |
 | [Watchtower](https://containrrr.dev/watchtower/) | Container updater |  |  |
 | [Autoheal](https://github.com/willfarrell/docker-autoheal/?tab=readme-ov-file) | Container restarter |  |  |
 
@@ -126,6 +125,7 @@ Profiles are defined in the `docker-compose.yml` file. They are used to define w
 | Profile | Description | Applications |
 | ------- | ----------- | ------------ |
 | `plex_plugin` | Plex plugin | Tautulli, Plex Meta Manager |
+| `advanced_tools` | Advanced tools | Firefox |
 
 
 ## Quick start

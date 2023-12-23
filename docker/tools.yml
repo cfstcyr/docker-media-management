@@ -80,6 +80,8 @@ services:
   firefox:
     image: lscr.io/linuxserver/firefox:latest
     container_name: firefox
+    profiles:
+      - advanced_tools
     depends_on:
       - vpn
     security_opt:
