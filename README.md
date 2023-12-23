@@ -65,7 +65,7 @@ The `.env` file contains the environment variables for the containers.
 | -------- | ----------- | ------------- |
 | `USER_ID` | User ID | `1000` |
 | `GROUP_ID` | Group ID | `1000` |
-| `TZ` | Timezone | `Europe/Paris` |
+| `TZ` | Timezone | `Etc/UTC` |
 | `WIREGUARD_PRIVATE_KEY`* | Wireguard private key | `""` |
 | `WIREGUARD_PUBLIC_KEY`* | Wireguard public key | `""` |
 | `WIREGUARD_ENDPOINT`* | Wireguard endpoint | `""` |
