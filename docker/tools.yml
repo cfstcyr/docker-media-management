@@ -16,10 +16,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_DASHBOARD_SUBDOMAIN:-traefik.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080"
       - homepage.group=Tools
       - homepage.name=Traefik
       - homepage.icon=traefik.png
-      - homepage.href=http://localhost:8080/
+      - homepage.href=http://${TRAEFIK_DASHBOARD_SUBDOMAIN:-traefik.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Reverse proxy
       - homepage.weight=5
       - homepage.widget.type=traefik

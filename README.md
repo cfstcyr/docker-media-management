@@ -80,6 +80,7 @@ The `.env` file contains the environment variables for the containers.
 | `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Movies/Download"` |
 | `DOMAIN` | Domain name to access the applications | `localhost` |
 | `HOME_SUBDOMAIN` | Subdomain for the home page | `media` |
+| `TRAEFIK_SUBDOMAIN` | Subdomain for Traefik | `traefik.media` |
 | `PLEX_SUBDOMAIN` | Subdomain for Plex | `plex.media` |
 | `TAUTULLI_SUBDOMAIN` | Subdomain for Tautulli | `tautulli.media` |
 | `RADARR_SUBDOMAIN` | Subdomain for Radarr | `radarr.media` |
