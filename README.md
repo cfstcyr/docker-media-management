@@ -127,10 +127,10 @@ The `.env` file contains the environment variables for the containers.
 
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
-| `LIBRARY_MOVIES_PATH` | Path to the directory where movies will be stored | `"~/Movies/Plex/Movies"` |
-| `LIBRARY_TV_PATH` | Path to the directory where TV shows will be stored | `"~/Movies/Plex/TV"` |
-| `LIBRARY_BOOKS_PATH` | Path to the directory where books will be stored | `"~/Books"` |
-| `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Movies/Download"` |
+| `LIBRARY_MOVIES_PATH` | Path to the directory where movies will be stored | `"~/Media Library/Movies"` |
+| `LIBRARY_TV_PATH` | Path to the directory where TV shows will be stored | `"~/Media Library/TV"` |
+| `LIBRARY_BOOKS_PATH` | Path to the directory where books will be stored | `"~/Media Library/Books"` |
+| `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Media Library/Download"` |
 
 #### URLs variables
 

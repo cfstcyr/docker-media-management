@@ -13,8 +13,8 @@ services:
       - TZ=${TIMEZONE:-Etc/UTC}
     volumes:
       - ../config/radarr:/config
-      - ${LIBRARY_MOVIES_PATH:-~/Movies/Plex/Movies}:/movies #optional
-      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+      - ${LIBRARY_MOVIES_PATH:-~/Media Library/Movies}:/movies #optional
+      - ${DOWNLOAD_PATH:-~/Media Library/Download}:/downloads #optional
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`${RADARR_SUBDOMAIN:-radarr.media}.${DOMAIN:-localhost}`)"
@@ -42,8 +42,8 @@ services:
       - TZ=${TIMEZONE:-Etc/UTC}
     volumes:
       - ../config/sonarr:/config
-      - ${LIBRARY_TV_PATH:-~/Movies/Plex/TV}:/tv #optional
-      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+      - ${LIBRARY_TV_PATH:-~/Media Library/TV}:/tv #optional
+      - ${DOWNLOAD_PATH:-~/Media Library/Download}:/downloads #optional
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`${SONARR_SUBDOMAIN:-sonarr.media}.${DOMAIN:-localhost}`)"
@@ -73,8 +73,8 @@ services:
       - TZ=${TIMEZONE:-Etc/UTC}
     volumes:
       - ../config/readarr:/config
-      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books #optional
-      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+      - ${LIBRARY_BOOKS_PATH:-~/Media Library/Books}:/books #optional
+      - ${DOWNLOAD_PATH:-~/Media Library/Download}:/downloads #optional
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.readarr.rule=Host(`${READARR_SUBDOMAIN:-readarr.media}.${DOMAIN:-localhost}`)"

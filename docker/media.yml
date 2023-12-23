@@ -12,8 +12,8 @@ services:
       - VERSION=docker
     volumes:
       - ../config/plex:/config
-      - ${LIBRARY_TV_PATH:-~/Movies/Plex/TV}:/tv
-      - ${LIBRARY_MOVIES_PATH:-~/Movies/Plex/Movies}:/movies
+      - ${LIBRARY_TV_PATH:-~/Media Library/TV}:/tv
+      - ${LIBRARY_MOVIES_PATH:-~/Media Library/Movies}:/movies
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plex.rule=Host(`${PLEX_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}`)"
@@ -41,7 +41,7 @@ services:
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
       - ../config/calibre-web:/config
-      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books
+      - ${LIBRARY_BOOKS_PATH:-~/Media Library/Books}:/books
     ports:
       - ${CALIBRE_WEB_PORT:-8083}:8083
     labels:

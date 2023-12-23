@@ -62,7 +62,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:transmission-transmissionic
     volumes:
       - ../config/transmission:/config
-      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads
+      - ${DOWNLOAD_PATH:-~/Media Library/Download}:/downloads
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.transmission.rule=Host(`${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}`)"
@@ -123,7 +123,7 @@ services:
       - CLI_ARGS= #optional
     volumes:
       - ../config/calibre:/config
-      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books
+      - ${LIBRARY_BOOKS_PATH:-~/Media Library/Books}:/books
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.calibre.rule=Host(`${CALIBRE_SUBDOMAIN:-calibre.media}.${DOMAIN:-localhost}`)"
