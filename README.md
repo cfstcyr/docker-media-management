@@ -101,7 +101,7 @@ The `.env` file contains the environment variables for the containers.
 
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
-| `COMPOSE_PROFILES` | Profiles to include separated by spaces (See [profiles list](#profiles-list)) | `""` |
+| `COMPOSE_PROFILES` | Profiles to include separated by commas (See [profiles list](#profiles-list)) | `""` |
 
 #### VPN variables
 
