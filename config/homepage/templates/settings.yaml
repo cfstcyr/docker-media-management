@@ -1,3 +1,14 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/settings
+
+headerStyle: clean
+hideErrors: true
+
+layout:
+  Media:
+    icon: mdi-movie
+  Management:
+    icon: mdi-folder
+  Tools:
+    icon: mdi-toolbox

@@ -21,6 +21,8 @@ services:
       - homepage.icon=traefik.png
       - homepage.href=http://localhost:8080/
       - homepage.description=Reverse proxy
+      - homepage.widget.type=traefik
+      - homepage.widget.url=http://traefik:8080
     healthcheck:
       test: [ "CMD", "traefik", "healthcheck", "--ping" ]
       interval: 5s
@@ -30,8 +32,6 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      PUID: 1000
-      PGID: 1000
       HOMEPAGE_VAR_TITLE: Medias
     ports:
       - ${HOMEPAGE_PORT:-6900}:3000
@@ -68,6 +68,8 @@ services:
       - homepage.icon=transmission.png
       - homepage.href=http://${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}
       - homepage.description=Download client
+      - homepage.widget.type=transmission
+      - homepage.widget.url=http://vpn:9091
     restart: unless-stopped
 
   firefox:

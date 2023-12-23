@@ -92,6 +92,12 @@ The `.env` file contains the environment variables for the containers.
 | `WIREGUARD_PRIVATE_KEY`* | Wireguard private key | `""` |
 | `WIREGUARD_PUBLIC_KEY`* | Wireguard public key | `""` |
 | `WIREGUARD_ENDPOINT`* | Wireguard endpoint | `""` |
+| `PLEX_TOKEN` | Plex token | `""` |
+| `TAUTULLI_TOKEN` | Tautulli token | `""` |
+| `RADARR_TOKEN` | Radarr token | `""` |
+| `SONARR_TOKEN` | Sonarr token | `""` |
+| `PROWLARR_TOKEN` | Prowlarr token | `""` |
+| `OVERSEERR_TOKEN` | Overseerr token | `""` |
 | `LIBRARY_MOVIES_PATH` | Path to the directory where movies will be stored | `"~/Movies/Plex/Movies"` |
 | `LIBRARY_TV_PATH` | Path to the directory where TV shows will be stored | `"~/Movies/Plex/TV"` |
 | `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Movies/Download"` |
