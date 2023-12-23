@@ -75,24 +75,59 @@ The variables are stored in the `.env` file. Initially, the `.env.template` file
 
 The `.env` file contains the environment variables for the containers.
 
+- [General](#general-variables)
+- [Docker](#docker-variables)
+- [VPN](#vpn-variables)
+- [Tokens](#tokens-variables)
+- [Paths](#paths-variables)
+- [URLs](#urls-variables)
+- [Ports](#ports-variables)
+
+#### General variables
+
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
 | `USER_ID` | User ID | `1000` |
 | `GROUP_ID` | Group ID | `1000` |
 | `TZ` | Timezone | `Etc/UTC` |
+
+#### Docker variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `COMPOSE_PROFILES` | Profiles to include separated by spaces (See [profiles list](#profiles-list)) | `""` |
+
+#### VPN variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `WIREGUARD_PRIVATE_KEY`* | Wireguard private key | `""` |
 | `WIREGUARD_PUBLIC_KEY`* | Wireguard public key | `""` |
 | `WIREGUARD_ENDPOINT`* | Wireguard endpoint | `""` |
+
+#### Tokens variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `PLEX_TOKEN` | Plex token | `""` |
 | `TAUTULLI_TOKEN` | Tautulli token | `""` |
 | `RADARR_TOKEN` | Radarr token | `""` |
 | `SONARR_TOKEN` | Sonarr token | `""` |
 | `PROWLARR_TOKEN` | Prowlarr token | `""` |
 | `OVERSEERR_TOKEN` | Overseerr token | `""` |
+
+#### Paths variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `LIBRARY_MOVIES_PATH` | Path to the directory where movies will be stored | `"~/Movies/Plex/Movies"` |
 | `LIBRARY_TV_PATH` | Path to the directory where TV shows will be stored | `"~/Movies/Plex/TV"` |
 | `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Movies/Download"` |
+
+#### URLs variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `DOMAIN` | Domain name to access the applications | `localhost` |
 | `HOME_SUBDOMAIN` | Subdomain for the home page | `media` |
 | `TRAEFIK_SUBDOMAIN` | Subdomain for Traefik | `traefik.media` |
@@ -104,6 +139,11 @@ The `.env` file contains the environment variables for the containers.
 | `OVERSEERR_SUBDOMAIN` | Subdomain for Overseerr | `overseerr.media` |
 | `TRANSMISSION_SUBDOMAIN` | Subdomain for Transmission | `download.media` |
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
+
+#### Ports variables
+
+| Variable | Description | Default value |
+| -------- | ----------- | ------------- |
 | `TRAEFIK_PORT` | Port for Traefik | `80` |
 | `TRAEFIK_DASHBOARD_PORT` | Port for Traefik dashboard | `8080` |
 | `HOMEPAGE_PORT` | Port for the home page | `6900` |
