@@ -278,3 +278,21 @@ To add more configurations, see the [documentation](https://gethomepage.dev) and
 #### Traefik
 
 Traefik is automatically configured directly from the Docker Compose file. There is no need to configure it.
+
+## File structure
+
+```
+.
+├── config/
+│   └── */ # Application specific configurations
+│
+├── docker/
+│   ├── management.yml  # Docker Compose file for management applications
+│   ├── media.yml       # Docker Compose file for media applications
+│   ├── tools.yml       # Docker Compose file for tools applications
+│   └── vpn.yml         # Docker Compose file for VPN
+│
+├── .env.template       # Environment variables template
+├── docker-compose.yml  # Docker Compose file
+└── Makefile            # Makefile with scripts to start/stop the containers
+```
