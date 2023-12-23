@@ -7,9 +7,20 @@ This project is a docker-compose configuration for a media management system. Th
 - [About](#about)
     - [Applications list](#applications-list)
     - [Variables list](#variables-list)
-- [Applications](#applications)
 - [Quick start](#quick-start)
 - [Configuration](#configuration)
+    1. [Install the requirements](#1-install-the-requirements)
+    2. [Initialize the environment](#2-initialize-the-environment)
+    3. [Start the containers](#3-start-the-containers)
+    4. [Configure the applications](#4-configure-the-applications)
+        - [Plex](#plex)
+        - [Radarr, Sonarr](#radarr-sonarr)
+        - [Prowlarr](#prowlarr)
+        - [Overseerr](#overseerr)
+        - [Tautulli](#tautulli)
+        - [Plex Meta Manager](#plex-meta-manager)
+        - [Homepage](#homepage)
+        - [Traefik](#traefik)
 
 ## About
 
