@@ -22,9 +22,12 @@ Applications for managing media.
 
 | Application | Description | Default URL | Default port |
 | ----------- | ----------- | ----------- | ------------ |
+| [Overseerr](https://overseerr.dev/) | Request management | http://overseerr.media.localhost | 5055 |
 | [Radarr](https://radarr.video/) | Movie management | http://radarr.media.localhost | 7878 |
 | [Sonarr](https://sonarr.tv/) | TV management | http://sonarr.media.localhost | 8989 |
 | [Prowlarr](https://prowlarr.com/) | Indexer management | http://prowlarr.media.localhost | 9696 |
+| [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
+| [Firefox](https://docs.linuxserver.io/images/docker-firefox/) | Browser | http://browser.media.localhost | 5800 |
 
 ### Tools
 
@@ -96,6 +99,7 @@ The `.env` file contains the environment variables for the containers.
 | `RADARR_SUBDOMAIN` | Subdomain for Radarr | `radarr.media` |
 | `SONARR_SUBDOMAIN` | Subdomain for Sonarr | `sonarr.media` |
 | `PROWLARR_SUBDOMAIN` | Subdomain for Prowlarr | `prowlarr.media` |
+| `OVERSEERR_SUBDOMAIN` | Subdomain for Overseerr | `overseerr.media` |
 | `TRANSMISSION_SUBDOMAIN` | Subdomain for Transmission | `download.media` |
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
 | `TRAEFIK_PORT` | Port for Traefik | `80` |
@@ -106,6 +110,7 @@ The `.env` file contains the environment variables for the containers.
 | `RADARR_PORT` | Port for Radarr | `7878` |
 | `SONARR_PORT` | Port for Sonarr | `8989` |
 | `PROWLARR_PORT` | Port for Prowlarr | `9696` |
+| `OVERSEERR_PORT` | Port for Overseerr | `5055` |
 | `TRANSMISSION_PORT` | Port for Transmission | `9091` |
 | `FIREFOX_PORT` | Port for Firefox | `5800` |
 

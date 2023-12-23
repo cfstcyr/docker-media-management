@@ -58,7 +58,7 @@ services:
       - vpn
     network_mode: service:vpn
     environment:
-      - HostPUID=${USER_ID:-1000}
+      - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
       - TZ=${TIMEZONE:-Etc/UTC}
     volumes:
@@ -72,4 +72,26 @@ services:
       - homepage.icon=prowlarr.png
       - homepage.href=http://${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}
       - homepage.description=Indexer management
+    restart: unless-stopped
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/overseerr:/config
+    ports:
+      - ${OVERSEERR_PORT:-5055}:5055
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overseerr.rule=Host(`${OVERSEERR_SUBDOMAIN:-request.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.overseerr.loadbalancer.server.port=5055"
+      - homepage.group=Management
+      - homepage.name=Overseerr
+      - homepage.icon=overseerr.png
+      - homepage.href=http://${OVERSEERR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}
+      - homepage.description=Media requests
     restart: unless-stopped

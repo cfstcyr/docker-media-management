@@ -29,6 +29,11 @@ services:
       file: ./docker/management.yml
       service: prowlarr
 
+  overseerr:
+    extends:
+      file: ./docker/management.yml
+      service: overseerr
+
   # ========================
   # Media
   # ========================
