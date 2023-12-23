@@ -3,7 +3,6 @@
 # https://gethomepage.dev/latest/configs/settings
 
 headerStyle: clean
-hideErrors: true
 
 layout:
   Media:
