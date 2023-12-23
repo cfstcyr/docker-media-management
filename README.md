@@ -1,8 +1,10 @@
 # Media management system Docker
 
-This project is a docker-compose configuration for a media management system. This uses a WireGuard VPN to access the applications. Applications like Plex and the *arrs are used to manage and consume media.
+This Docker-compose project provides a secure and comprehensive media management system. It uses WireGuard VPN for secure access and includes applications like Plex, Radarr, Sonarr, and others for media management and consumption.
 
 ![Preview](./assets/preview.jpeg)
+
+The project includes a detailed guide for quick setup and configuration. Each application has its own dedicated section in the configuration guide, ensuring you have all the information you need to get the most out of your media management system.
 
 ## Table of Contents
 
