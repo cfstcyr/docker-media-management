@@ -48,6 +48,11 @@ services:
       file: ./docker/media.yml
       service: tautulli
 
+  plex-meta-manager:
+    extends:
+      file: ./docker/media.yml
+      service: plex-meta-manager
+
   # ========================
   # Tools
   # ========================

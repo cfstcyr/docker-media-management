@@ -51,7 +51,7 @@ services:
       - vpn
     network_mode: service:vpn
     environment:
-      - HostPUID=${USER_ID:-1000}
+      - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
       - TZ=${TIMEZONE:-Etc/UTC}
       - DOCKER_MODS=linuxserver/mods:transmission-transmissionic
@@ -78,7 +78,7 @@ services:
       - seccomp:unconfined
     network_mode: service:vpn
     environment:
-      - HostPUID=${USER_ID:-1000}
+      - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
       - TZ=${TIMEZONE:-Etc/UTC}
       - CUSTOM_PORT=5800

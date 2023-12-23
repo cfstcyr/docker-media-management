@@ -15,6 +15,7 @@ Applications for using media.
 | ----------- | ----------- | ----------- | ------------ |
 | [Plex](https://www.plex.tv/) | Media server | http://plex.media.localhost | 32400 |
 | [Tautulli](https://tautulli.com/) | Plex monitoring | http://tautulli.media.localhost | 8181 |
+| [Plex Meta Manager](https://metamanager.wiki) | Plex metadata management |  |  |
 
 ### Management
 
