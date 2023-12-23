@@ -25,7 +25,7 @@ services:
       - homepage.description=Media server
       - homepage.weight=1
       - homepage.widget.type=plex
-      - homepage.widget.url=http://plex:32400
+      - homepage.widget.url=http://vpn:32400
       - homepage.widget.key=${PLEX_TOKEN}
     restart: unless-stopped
 
