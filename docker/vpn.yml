@@ -18,6 +18,7 @@ services:
       - ${PROWLARR_PORT:-9696}:9696 # Prowlarr
       - ${TRANSMISSION_PORT:-9091}:9091 # Transmission
       - ${FIREFOX_PORT:-5800}:5800 # Firefox
+      - ${PLEX_PORT:-32400}:32400
     volumes:
       - ../config/gluetun:/gluetun
     environment:
