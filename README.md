@@ -102,14 +102,6 @@ The `.env` file contains the environment variables for the containers.
 
 ## Quick start
 
-2. Initialize the environment
-    1. Copy the `.env.template` file to `.env`
-    2. Add the required variables in the `.env` file
-3. Start the containers
-4. Configure the applications
-    1. Radarr, Sonarr
-    2. Prowlarr
-
 ### 1. Install the requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
