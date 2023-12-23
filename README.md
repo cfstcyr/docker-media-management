@@ -21,6 +21,7 @@ This project is a docker-compose configuration for a media management system. Th
         - [Plex Meta Manager](#plex-meta-manager)
         - [Homepage](#homepage)
         - [Traefik](#traefik)
+- [File structure](#file-structure)
 
 ## About
 
