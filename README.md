@@ -1,5 +1,7 @@
 # Media management system Docker
 
+This project is a docker-compose configuration for a media management system. This uses a WireGuard VPN to access the applications. Applications like Plex and the *arrs are used to manage and consume media.
+
 ## Table of Contents
 
 - [About](#about)
@@ -244,3 +246,7 @@ Go to `https://plex.media.localhost` and follow the instructions.
     1. Go to `Settings` > `Web Interface`
     2. Copy the API key
     3. Paste the API key in the `.env` file
+
+#### Plex Meta Manager
+
+> TODO
