@@ -104,6 +104,10 @@ The `.env` file contains the environment variables for the containers.
 
 ## Quick start
 
+This is the step by step guide to start the containers.
+
+> **Note**: The quick start guide uses urls with the default values to navigate in the browser (ex: `http://movie.media.localhost`). If the default values are changed, the urls must be changed accordingly. You can also use the ports directly (ex: `http://localhost:7878`), but make sure to use the custom port if it is changed.
+
 ### 1. Install the requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
@@ -250,3 +254,15 @@ Go to `https://plex.media.localhost` and follow the instructions.
 #### Plex Meta Manager
 
 > TODO
+
+#### Homepage
+
+The homepage is automatically configured directly from the Docker Compose file.
+
+When the homepage container starts, it automatically copies the configurations from `./config/homepage/templates` to `./config/homepage`. Those configurations are empty by default, but the apps are added automatically.
+
+To add more configurations, see the [documentation](https://gethomepage.dev) and update the files in `./config/homepage` (and not in `./config/homepage/templates`).
+
+#### Traefik
+
+Traefik is automatically configured directly from the Docker Compose file. There is no need to configure it.
