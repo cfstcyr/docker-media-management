@@ -10,6 +10,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     ports:
       - 8888:8888/tcp # HTTP proxy
+      - 8000:8000/tcp # Control server
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
       - ${RADARR_PORT:-7878}:7878 # Radarr
@@ -25,6 +26,12 @@ services:
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
+    labels:
+      - homepage.group=Tools
+      - homepage.name=VPN
+      - homepage.icon=gluetun.png
+      - homepage.widget.type=gluetun
+      - homepage.widget.url=http://vpn:8000
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
       interval: 30s
