@@ -24,6 +24,7 @@ services:
       - homepage.icon=plex.png
       - homepage.href=http://${PLEX_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}
       - homepage.description=Media server
+      - homepage.weight=1
       - homepage.widget.type=plex
       - homepage.widget.url=http://plex:32400
       - homepage.widget.key=${PLEX_TOKEN}
@@ -49,6 +50,7 @@ services:
       - homepage.icon=tautulli.png
       - homepage.href=http://${TAUTULLI_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}
       - homepage.description=Plex monitoring
+      - homepage.weight=5
       - homepage.widget.type=tautulli
       - homepage.widget.url=http://tautulli:8181
       - homepage.widget.key=${TAUTULLI_TOKEN}

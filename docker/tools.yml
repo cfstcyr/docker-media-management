@@ -21,6 +21,7 @@ services:
       - homepage.icon=traefik.png
       - homepage.href=http://localhost:8080/
       - homepage.description=Reverse proxy
+      - homepage.weight=5
       - homepage.widget.type=traefik
       - homepage.widget.url=http://traefik:8080
     healthcheck:
@@ -68,6 +69,7 @@ services:
       - homepage.icon=transmission.png
       - homepage.href=http://${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}
       - homepage.description=Download client
+      - homepage.weight=1
       - homepage.widget.type=transmission
       - homepage.widget.url=http://vpn:9091
     restart: unless-stopped
@@ -96,6 +98,7 @@ services:
       - homepage.icon=firefox.png
       - homepage.href=http://${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}
       - homepage.description=Web browser
+      - homepage.weight=1
     shm_size: "1gb"
     restart: unless-stopped
 

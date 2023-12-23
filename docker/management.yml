@@ -24,6 +24,7 @@ services:
       - homepage.icon=radarr.png
       - homepage.href=http://${RADARR_SUBDOMAIN:-movie.media}.${DOMAIN:-localhost}
       - homepage.description=Movies management
+      - homepage.weight=5
       - homepage.widget.type=radarr
       - homepage.widget.url=http://vpn:7878
       - homepage.widget.key=${RADARR_TOKEN}
@@ -52,6 +53,7 @@ services:
       - homepage.icon=sonarr.png
       - homepage.href=http://${SONARR_SUBDOMAIN:-tv.media}.${DOMAIN:-localhost}
       - homepage.description=TV shows management
+      - homepage.weight=5
       - homepage.widget.type=sonarr
       - homepage.widget.url=http://vpn:8989
       - homepage.widget.key=${SONARR_TOKEN}
@@ -78,6 +80,7 @@ services:
       - homepage.icon=prowlarr.png
       - homepage.href=http://${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}
       - homepage.description=Indexer management
+      - homepage.weight=10
       - homepage.widget.type=prowlarr
       - homepage.widget.url=http://vpn:9696
       - homepage.widget.key=${PROWLARR_TOKEN}
@@ -103,6 +106,7 @@ services:
       - homepage.icon=overseerr.png
       - homepage.href=http://${OVERSEERR_SUBDOMAIN:-request.media}.${DOMAIN:-localhost}
       - homepage.description=Media requests
+      - homepage.weight=1
       - homepage.widget.type=overseerr
       - homepage.widget.url=http://overseerr:5055
       - homepage.widget.key=${OVERSEERR_TOKEN}

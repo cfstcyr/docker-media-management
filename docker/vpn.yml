@@ -30,6 +30,7 @@ services:
       - homepage.group=Tools
       - homepage.name=VPN
       - homepage.icon=gluetun.png
+      - homepage.weight=10
       - homepage.widget.type=gluetun
       - homepage.widget.url=http://vpn:8000
     healthcheck:
