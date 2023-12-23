@@ -67,7 +67,7 @@ services:
       - homepage.group=Tools
       - homepage.name=Transmission
       - homepage.icon=transmission.png
-      - homepage.href=http://${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Download client
       - homepage.weight=1
       - homepage.widget.type=transmission
@@ -96,7 +96,7 @@ services:
       - homepage.group=Tools
       - homepage.name=Firefox
       - homepage.icon=firefox.png
-      - homepage.href=http://${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Web browser
       - homepage.weight=1
     shm_size: "1gb"

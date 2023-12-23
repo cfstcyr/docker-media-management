@@ -21,7 +21,7 @@ services:
       - homepage.group=Media
       - homepage.name=Plex
       - homepage.icon=plex.png
-      - homepage.href=http://${PLEX_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${PLEX_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Media server
       - homepage.weight=1
       - homepage.widget.type=plex
@@ -47,7 +47,7 @@ services:
       - homepage.group=Media
       - homepage.name=Tautulli
       - homepage.icon=tautulli.png
-      - homepage.href=http://${TAUTULLI_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${TAUTULLI_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Plex monitoring
       - homepage.weight=5
       - homepage.widget.type=tautulli

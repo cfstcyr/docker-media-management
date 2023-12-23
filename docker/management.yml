@@ -22,7 +22,7 @@ services:
       - homepage.group=Management
       - homepage.name=Radarr
       - homepage.icon=radarr.png
-      - homepage.href=http://${RADARR_SUBDOMAIN:-movie.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${RADARR_SUBDOMAIN:-movie.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Movies management
       - homepage.weight=5
       - homepage.widget.type=radarr
@@ -51,7 +51,7 @@ services:
       - homepage.group=Management
       - homepage.name=Sonarr
       - homepage.icon=sonarr.png
-      - homepage.href=http://${SONARR_SUBDOMAIN:-tv.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${SONARR_SUBDOMAIN:-tv.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=TV shows management
       - homepage.weight=5
       - homepage.widget.type=sonarr
@@ -78,7 +78,7 @@ services:
       - homepage.group=Management
       - homepage.name=Prowlarr
       - homepage.icon=prowlarr.png
-      - homepage.href=http://${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${PROWLARR_SUBDOMAIN:-indexer.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Indexer management
       - homepage.weight=10
       - homepage.widget.type=prowlarr
@@ -104,7 +104,7 @@ services:
       - homepage.group=Management
       - homepage.name=Overseerr
       - homepage.icon=overseerr.png
-      - homepage.href=http://${OVERSEERR_SUBDOMAIN:-request.media}.${DOMAIN:-localhost}
+      - homepage.href=http://${OVERSEERR_SUBDOMAIN:-request.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Media requests
       - homepage.weight=1
       - homepage.widget.type=overseerr
