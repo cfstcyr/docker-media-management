@@ -18,9 +18,12 @@ This project is a docker-compose configuration for a media management system. Th
     4. [Configure the applications](#4-configure-the-applications)
         - [Plex](#plex)
         - [Radarr, Sonarr](#radarr-sonarr)
+        - [Calibre](#calibre)
+        - [Readarr](#readarr)
         - [Prowlarr](#prowlarr)
         - [Overseerr](#overseerr)
         - [Tautulli](#tautulli)
+        - [Calibre Web](#calibre-web)
         - [Plex Meta Manager](#plex-meta-manager)
         - [Homepage](#homepage)
         - [Traefik](#traefik)
@@ -37,6 +40,7 @@ Applications for using media.
 | Application | Description | Default URL | Default port |
 | ----------- | ----------- | ----------- | ------------ |
 | [Plex](https://www.plex.tv/) | Media server | http://plex.media.localhost | 32400 |
+| [Calibre Web](https://github.com/janeczku/calibre-web) `optional` | E-book server | http://read.media.localhost | 8083 |
 | [Tautulli](https://tautulli.com/) `optional` | Plex monitoring | http://tautulli.media.localhost | 8181 |
 | [Plex Meta Manager](https://metamanager.wiki) `optional` | Plex metadata management |  |  |
 
@@ -49,6 +53,7 @@ Applications for managing media.
 | [Overseerr](https://overseerr.dev/) | Request management | http://overseerr.media.localhost | 5055 |
 | [Radarr](https://radarr.video/) | Movie management | http://radarr.media.localhost | 7878 |
 | [Sonarr](https://sonarr.tv/) | TV management | http://sonarr.media.localhost | 8989 |
+| [Readarr](https://readarr.com/) `optional` | Book management | http://readarr.media.localhost | 8787 |
 | [Prowlarr](https://prowlarr.com/) | Indexer management | http://prowlarr.media.localhost | 9696 |
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
 
@@ -59,6 +64,7 @@ Applications for managing media.
 | [Home page](https://gethomepage.dev/v0.8.3/) | Home page | http://media.localhost | 6900 |
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
 | [Firefox](https://docs.linuxserver.io/images/docker-firefox/) `optional` | Browser | http://browser.media.localhost | 5800 |
+| [Calibre](https://calibre-ebook.com/) `optional` | E-book management | http://calibre.media.localhost | 6920 |
 | [Watchtower](https://containrrr.dev/watchtower/) | Container updater |  |  |
 | [Autoheal](https://github.com/willfarrell/docker-autoheal/?tab=readme-ov-file) | Container restarter |  |  |
 
@@ -113,6 +119,7 @@ The `.env` file contains the environment variables for the containers.
 | `TAUTULLI_TOKEN` | Tautulli token | `""` |
 | `RADARR_TOKEN` | Radarr token | `""` |
 | `SONARR_TOKEN` | Sonarr token | `""` |
+| `READARR_TOKEN` | Readarr token | `""` |
 | `PROWLARR_TOKEN` | Prowlarr token | `""` |
 | `OVERSEERR_TOKEN` | Overseerr token | `""` |
 
@@ -122,6 +129,7 @@ The `.env` file contains the environment variables for the containers.
 | -------- | ----------- | ------------- |
 | `LIBRARY_MOVIES_PATH` | Path to the directory where movies will be stored | `"~/Movies/Plex/Movies"` |
 | `LIBRARY_TV_PATH` | Path to the directory where TV shows will be stored | `"~/Movies/Plex/TV"` |
+| `LIBRARY_BOOKS_PATH` | Path to the directory where books will be stored | `"~/Books"` |
 | `DOWNLOADS_PATH` | Path to the directory where downloads will be stored | `"~/Movies/Download"` |
 
 #### URLs variables
@@ -135,10 +143,13 @@ The `.env` file contains the environment variables for the containers.
 | `TAUTULLI_SUBDOMAIN` | Subdomain for Tautulli | `tautulli.media` |
 | `RADARR_SUBDOMAIN` | Subdomain for Radarr | `radarr.media` |
 | `SONARR_SUBDOMAIN` | Subdomain for Sonarr | `sonarr.media` |
+| `READARR_SUBDOMAIN` | Subdomain for Readarr | `readarr.media` |
 | `PROWLARR_SUBDOMAIN` | Subdomain for Prowlarr | `prowlarr.media` |
 | `OVERSEERR_SUBDOMAIN` | Subdomain for Overseerr | `overseerr.media` |
 | `TRANSMISSION_SUBDOMAIN` | Subdomain for Transmission | `download.media` |
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
+| `CALIBRE_SUBDOMAIN` | Subdomain for Calibre | `calibre.media` |
+| `CALIBRE_WEB_SUBDOMAIN` | Subdomain for Calibre Web | `read.media` |
 
 #### Ports variables
 
@@ -151,10 +162,15 @@ The `.env` file contains the environment variables for the containers.
 | `TAUTULLI_PORT` | Port for Tautulli | `8181` |
 | `RADARR_PORT` | Port for Radarr | `7878` |
 | `SONARR_PORT` | Port for Sonarr | `8989` |
+| `READARR_PORT` | Port for Readarr | `8787` |
 | `PROWLARR_PORT` | Port for Prowlarr | `9696` |
 | `OVERSEERR_PORT` | Port for Overseerr | `5055` |
 | `TRANSMISSION_PORT` | Port for Transmission | `9091` |
 | `FIREFOX_PORT` | Port for Firefox | `5800` |
+| `CALIBRE_PORT` | Port for Calibre | `6920` |
+| `CALIBRE_DESKTOP_SECURE_PORT` | Port for Calibre Desktop in HTTPS | `6201` |
+| `CALIBRE_WEBSERVER_PORT` | Port for Calibre Webserver | `6202` |
+| `CALIBRE_WEB_PORT` | Port for Calibre Web | `8083` |
 
 > `*` Required variables
 
@@ -164,6 +180,7 @@ Profiles are defined in the `docker-compose.yml` file. They are used to define w
 
 | Profile | Description | Applications |
 | ------- | ----------- | ------------ |
+| `book` | Book management | Calibre, Calibre Web, Readarr |
 | `plex_plugin` | Plex plugin | Tautulli, Plex Meta Manager |
 | `advanced_tools` | Advanced tools | Firefox |
 
@@ -243,9 +260,63 @@ Go to `https://plex.media.localhost` and follow the instructions.
     3. Paste the API key in the `.env` file
 
 > **Note**: The ports specified are the internal ports used inside the containers. If the ports are changed in the `.env` file, _the ports must NOT be changed_ in the application configuration.
+
+#### Calibre
+
+> Only if `book` profile is enabled
+
+1. Go to `https://calibre.media.localhost`.
+2. Configure using the wizard:
+    1. Select calibre library location:
+        1. Click on `Change`
+        2. Select the path `/books`
+    2. Select e-book device
+    3. Turn on Content server
+    4. Click on `Finish`
+3. Go to `Preferences` > `Sharing over the net`
+    1. Turn on `Require username and password`
+    2. Turn on `Run server automatically`
+    3. Go to `User accounts` tab
+    4. Add a new user
+        - `Username`: `admin`
+        - `Password`: `admin`
+    5. Go back to `Main` tab
+    6. Click on `Start server`
+4. Go to `Preferences` > `Adding books`
+    1. Go to `Adding actions`
+    2. Turn on `When using the "Copy to library" action check for duplicates`
+    3. Turn on `Automatically convert added books`
+    4. Turn on `Auto-merge added books`
+    5. Click on `Apply`
+4. Get the API key:
+    1. Go to `Settings` > `General`
+    2. Copy the API key
+    3. Paste the API key in the `.env` file
+
+#### Readarr
+
+> Only if `book` profile is enabled
+
+1. Go to `https://readarr.media.localhost`.
+2. Add root folder: 
+    1. Go to `Settings` > `Media Management` > `Root Folders` > `Add Root Folder`
+    2. Enter the following information:
+        - `Path`: `/books`
+        - `Use Calibre Content Server`: `true`
+        - `Calibre Host`: `localhost`
+        - `Calibre Port`: `8081`
+        - `Calibre Username`: `admin`
+        - `Calibre Password`: `admin`
+3. Add download client:
+    1. Go to `Settings` > `Download Client` > `Add Download Client`
+    2. Select `Transmission`
+    3. Enter the following information:
+        - `Host`: `localhost`
+        - `Port`: `9091`
+
 #### Prowlarr
 
-1. Add apps (Radarr, Sonarr)
+1. Add apps (Radarr, Sonarr, Readarr)
     1. Go to `Settings` > `Apps` > `+`
     2. Select `Radarr` or `Sonarr`
     3. Enter the following information:
@@ -322,6 +393,22 @@ Go to `https://plex.media.localhost` and follow the instructions.
     1. Go to `Settings` > `Web Interface`
     2. Copy the API key
     3. Paste the API key in the `.env` file
+
+#### Calibre Web
+
+> Only if `book` profile is enabled
+
+1. Go to `https://read.media.localhost`.
+2. Login with the following credentials:
+    - `Username`: `admin`
+    - `Password`: `admin123`
+3. Select the library location:
+    1. Select `/books`
+    2. Click on `Save`
+4. Allow public access (optional):
+    1. Go to `Admin` > `Edit Basic Configuration` > `Feature Configuration`
+    2. Turn on `Enable Anonymous Browsing`
+    3. Click on `Save`
 
 #### Plex Meta Manager
 

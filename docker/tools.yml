@@ -107,6 +107,35 @@ services:
     shm_size: "1gb"
     restart: unless-stopped
 
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    network_mode: service:vpn
+    profiles:
+      - book
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+      - PASSWORD= #optional
+      - CLI_ARGS= #optional
+    volumes:
+      - ../config/calibre:/config
+      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre.rule=Host(`${CALIBRE_SUBDOMAIN:-calibre.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.calibre.loadbalancer.server.port=8080"
+      - homepage.group=Tools
+      - homepage.name=Calibre
+      - homepage.icon=calibre.png
+      - homepage.href=http://${CALIBRE_SUBDOMAIN:-calibre.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.description=Ebook manager
+      - homepage.weight=1
+    restart: unless-stopped
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower

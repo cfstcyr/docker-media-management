@@ -24,6 +24,11 @@ services:
       file: ./docker/management.yml
       service: sonarr
 
+  readarr:
+    extends:
+      file: ./docker/management.yml
+      service: readarr
+
   prowlarr:
     extends:
       file: ./docker/management.yml
@@ -42,6 +47,11 @@ services:
     extends:
       file: ./docker/media.yml
       service: plex
+
+  calibre-web:
+    extends:
+      file: ./docker/media.yml
+      service: calibre-web
 
   tautulli:
     extends:
@@ -76,6 +86,11 @@ services:
     extends:
       file: ./docker/tools.yml
       service: transmission
+
+  calibre:
+    extends:
+      file: ./docker/tools.yml
+      service: calibre
 
   watchtower:
     extends:

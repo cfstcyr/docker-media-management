@@ -29,6 +29,33 @@ services:
       - homepage.widget.key=${PLEX_TOKEN}
     restart: unless-stopped
 
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    profiles:
+      - book
+    environment:
+      - PUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - ../config/calibre-web:/config
+      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books
+    ports:
+      - ${CALIBRE_WEB_PORT:-8083}:8083
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre-web.rule=Host(`${CALIBRE_WEB_SUBDOMAIN:-read.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.calibre-web.loadbalancer.server.port=8083"
+      - homepage.group=Media
+      - homepage.name=Calibre Web
+      - homepage.icon=calibre-web.png
+      - homepage.href=http://${CALIBRE_WEB_SUBDOMAIN:-read.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.description=Books library
+      - homepage.weight=5
+    restart: unless-stopped
+
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli

@@ -15,10 +15,14 @@ services:
       - 8388:8388/udp # Shadowsocks
       - ${RADARR_PORT:-7878}:7878 # Radarr
       - ${SONARR_PORT:-8989}:8989 # Sonarr
+      - ${READARR_PORT:-8787}:8787 # Readarr
       - ${PROWLARR_PORT:-9696}:9696 # Prowlarr
       - ${TRANSMISSION_PORT:-9091}:9091 # Transmission
       - ${FIREFOX_PORT:-5800}:5800 # Firefox
       - ${PLEX_PORT:-32400}:32400
+      - ${CALIBRE_DESKTOP_PORT:-6920}:8080
+      - ${CALIBRE_DESKTOP_SECURE_PORT:-6201}:8181
+      - ${CALIBRE_WEBSERVER_PORT:-6202}:8081
     volumes:
       - ../config/gluetun:/gluetun
     environment:

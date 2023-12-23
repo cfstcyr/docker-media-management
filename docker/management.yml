@@ -58,6 +58,37 @@ services:
       - homepage.widget.url=http://vpn:8989
       - homepage.widget.key=${SONARR_TOKEN}
     restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:nightly
+    container_name: readarr
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    profiles:
+      - book
+    environment:
+      - PUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/readarr:/config
+      - ${LIBRARY_BOOKS_PATH:-~/Movies/Books}:/books #optional
+      - ${DOWNLOAD_PATH:-~/Movies/Download}:/downloads #optional
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.readarr.rule=Host(`${READARR_SUBDOMAIN:-book.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.readarr.loadbalancer.server.port=8787"
+      - homepage.group=Management
+      - homepage.name=Readarr
+      - homepage.icon=readarr.png
+      - homepage.href=http://${READARR_SUBDOMAIN:-book.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.description=Books management
+      - homepage.weight=5
+      - homepage.widget.type=readarr
+      - homepage.widget.url=http://vpn:8787
+      - homepage.widget.key=${READARR_TOKEN}
+    restart: unless-stopped
   
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
