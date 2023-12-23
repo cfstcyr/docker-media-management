@@ -9,6 +9,7 @@ This project is a docker-compose configuration for a media management system. Th
 - [About](#about)
     - [Applications list](#applications-list)
     - [Variables list](#variables-list)
+    - [Profiles list](#profiles-list)
 - [Quick start](#quick-start)
 - [Configuration](#configuration)
     1. [Install the requirements](#1-install-the-requirements)
@@ -36,8 +37,8 @@ Applications for using media.
 | Application | Description | Default URL | Default port |
 | ----------- | ----------- | ----------- | ------------ |
 | [Plex](https://www.plex.tv/) | Media server | http://plex.media.localhost | 32400 |
-| [Tautulli](https://tautulli.com/) | Plex monitoring | http://tautulli.media.localhost | 8181 |
-| [Plex Meta Manager](https://metamanager.wiki) | Plex metadata management |  |  |
+| [Tautulli](https://tautulli.com/) `optional` | Plex monitoring | http://tautulli.media.localhost | 8181 |
+| [Plex Meta Manager](https://metamanager.wiki) `optional` | Plex metadata management |  |  |
 
 #### Management
 
@@ -80,6 +81,7 @@ The `.env` file contains the environment variables for the containers.
 | `USER_ID` | User ID | `1000` |
 | `GROUP_ID` | Group ID | `1000` |
 | `TZ` | Timezone | `Etc/UTC` |
+| `COMPOSE_PROFILES` | Profiles to include separated by spaces (See [profiles list](#profiles-list)) | `""` |
 | `WIREGUARD_PRIVATE_KEY`* | Wireguard private key | `""` |
 | `WIREGUARD_PUBLIC_KEY`* | Wireguard public key | `""` |
 | `WIREGUARD_ENDPOINT`* | Wireguard endpoint | `""` |
@@ -117,6 +119,15 @@ The `.env` file contains the environment variables for the containers.
 
 > `*` Required variables
 
+### Profiles list
+
+Profiles are defined in the `docker-compose.yml` file. They are used to define which applications to start which enables to have optional applications. Use the variable `COMPOSE_PROFILES` to define which profiles to use.
+
+| Profile | Description | Applications |
+| ------- | ----------- | ------------ |
+| `plex_plugin` | Plex plugin | Tautulli, Plex Meta Manager |
+
+
 ## Quick start
 
 This is the step by step guide to start the containers.
@@ -136,7 +147,13 @@ Copy the `.env.template` file to `.env` and add the required variables in the `.
 cp .env.template .env
 ```
 
-Add the required variables in the `.env` file.
+#### 2.1. Add the required variables
+
+Some variables are required to start the containers (e.g. WireGuard keys). Those variables are marked with a `*` in the [variables list](#variables-list).
+
+#### 2.2. Select the profiles
+
+Some applications are optional. To enable them, add the profiles in the `COMPOSE_PROFILES` variable. The profiles are separated by spaces. See the [profiles list](#profiles-list) for more information.
 
 ### 3. Start the containers
 

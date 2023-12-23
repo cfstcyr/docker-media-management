@@ -32,6 +32,8 @@ services:
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli
+    profiles:
+      - plex_plugin
     environment:
       - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
@@ -58,6 +60,8 @@ services:
   plex-meta-manager:
     image: lscr.io/linuxserver/plex-meta-manager:latest
     container_name: plex-meta-manager
+    profiles:
+      - plex_plugin
     environment:
       - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
