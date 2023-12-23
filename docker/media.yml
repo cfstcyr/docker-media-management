@@ -46,12 +46,12 @@ services:
       - ${CALIBRE_WEB_PORT:-8083}:8083
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.calibre-web.rule=Host(`${CALIBRE_WEB_SUBDOMAIN:-read.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.calibre-web.rule=Host(`${CALIBRE_WEB_SUBDOMAIN:-calibre-web.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.calibre-web.loadbalancer.server.port=8083"
       - homepage.group=Media
       - homepage.name=Calibre Web
       - homepage.icon=calibre-web.png
-      - homepage.href=http://${CALIBRE_WEB_SUBDOMAIN:-read.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.href=http://${CALIBRE_WEB_SUBDOMAIN:-calibre-web.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
       - homepage.description=Books library
       - homepage.weight=5
     restart: unless-stopped

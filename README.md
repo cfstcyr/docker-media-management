@@ -40,7 +40,7 @@ Applications for using media.
 | Application | Description | Default URL | Default port |
 | ----------- | ----------- | ----------- | ------------ |
 | [Plex](https://www.plex.tv/) | Media server | http://plex.media.localhost | 32400 |
-| [Calibre Web](https://github.com/janeczku/calibre-web) `optional` | E-book server | http://read.media.localhost | 8083 |
+| [Calibre Web](https://github.com/janeczku/calibre-web) `optional` | E-book server | http://calibre-web.media.localhost | 8083 |
 | [Tautulli](https://tautulli.com/) `optional` | Plex monitoring | http://tautulli.media.localhost | 8181 |
 | [Plex Meta Manager](https://metamanager.wiki) `optional` | Plex metadata management |  |  |
 
@@ -149,7 +149,7 @@ The `.env` file contains the environment variables for the containers.
 | `TRANSMISSION_SUBDOMAIN` | Subdomain for Transmission | `download.media` |
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
 | `CALIBRE_SUBDOMAIN` | Subdomain for Calibre | `calibre.media` |
-| `CALIBRE_WEB_SUBDOMAIN` | Subdomain for Calibre Web | `read.media` |
+| `CALIBRE_WEB_SUBDOMAIN` | Subdomain for Calibre Web | `calibre-web.media` |
 
 #### Ports variables
 
@@ -189,7 +189,7 @@ Profiles are defined in the `docker-compose.yml` file. They are used to define w
 
 This is the step by step guide to start the containers.
 
-> **Note**: The quick start guide uses urls with the default values to navigate in the browser (ex: `http://movie.media.localhost`). If the default values are changed, the urls must be changed accordingly. You can also use the ports directly (ex: `http://localhost:7878`), but make sure to use the custom port if it is changed.
+> **Note**: The quick start guide uses urls with the default values to navigate in the browser (ex: `http://radarr.media.localhost`). If the default values are changed, the urls must be changed accordingly. You can also use the ports directly (ex: `http://localhost:7878`), but make sure to use the custom port if it is changed.
 
 ### 1. Install the requirements
 
@@ -398,7 +398,7 @@ Go to `https://plex.media.localhost` and follow the instructions.
 
 > Only if `book` profile is enabled
 
-1. Go to `https://read.media.localhost`.
+1. Go to `https://calibre-web.media.localhost`.
 2. Login with the following credentials:
     - `Username`: `admin`
     - `Password`: `admin123`
