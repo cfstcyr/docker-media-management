@@ -76,3 +76,13 @@ services:
     extends:
       file: ./docker/tools.yml
       service: transmission
+
+  watchtower:
+    extends:
+      file: ./docker/tools.yml
+      service: watchtower
+
+  autoheal:
+    extends:
+      file: ./docker/tools.yml
+      service: autoheal

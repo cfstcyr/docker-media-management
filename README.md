@@ -37,6 +37,8 @@ Applications for managing media.
 | [Home page](https://gethomepage.dev/v0.8.3/) | Home page | http://media.localhost | 6900 |
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
 | [Firefox](https://docs.linuxserver.io/images/docker-firefox/) | Browser | http://browser.media.localhost | 5800 |
+| [Watchtower](https://containrrr.dev/watchtower/) | Container updater |  |  |
+| [Autoheal](https://github.com/willfarrell/docker-autoheal/?tab=readme-ov-file) | Container restarter |  |  |
 
 ### Others
 
