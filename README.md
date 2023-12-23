@@ -2,6 +2,8 @@
 
 This project is a docker-compose configuration for a media management system. This uses a WireGuard VPN to access the applications. Applications like Plex and the *arrs are used to manage and consume media.
 
+![Preview](./assets/preview.jpeg)
+
 ## Table of Contents
 
 - [About](#about)
