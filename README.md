@@ -65,6 +65,7 @@ Applications for managing media.
 | [Transmission](https://transmissionbt.com/) | Torrent client | http://transmission.media.localhost | 9091 |
 | [Firefox](https://docs.linuxserver.io/images/docker-firefox/) `optional` | Browser | http://browser.media.localhost | 5800 |
 | [Calibre](https://calibre-ebook.com/) `optional` | E-book management | http://calibre.media.localhost | 6920 |
+| [Filebrowser](https://filebrowser.org/) | File browser | http://filebrowser.media.localhost | 6930 |
 | [Watchtower](https://containrrr.dev/watchtower/) | Container updater |  |  |
 | [Autoheal](https://github.com/willfarrell/docker-autoheal/?tab=readme-ov-file) | Container restarter |  |  |
 
@@ -150,6 +151,7 @@ The `.env` file contains the environment variables for the containers.
 | `FIREFOX_SUBDOMAIN` | Subdomain for Firefox | `browser.media` |
 | `CALIBRE_SUBDOMAIN` | Subdomain for Calibre | `calibre.media` |
 | `CALIBRE_WEB_SUBDOMAIN` | Subdomain for Calibre Web | `calibre-web.media` |
+| `FILEBROWSER_SUBDOMAIN` | Subdomain for Filebrowser | `filebrowser.media` |
 
 #### Ports variables
 
@@ -171,6 +173,7 @@ The `.env` file contains the environment variables for the containers.
 | `CALIBRE_DESKTOP_SECURE_PORT` | Port for Calibre Desktop in HTTPS | `6201` |
 | `CALIBRE_WEBSERVER_PORT` | Port for Calibre Webserver | `6202` |
 | `CALIBRE_WEB_PORT` | Port for Calibre Web | `8083` |
+| `FILEBROWSER_PORT` | Port for Filebrowser | `6930` |
 
 > `*` Required variables
 
@@ -182,7 +185,7 @@ Profiles are defined in the `docker-compose.yml` file. They are used to define w
 | ------- | ----------- | ------------ |
 | `book` | Book management | Calibre, Calibre Web, Readarr |
 | `plex_plugin` | Plex plugin | Tautulli, Plex Meta Manager |
-| `advanced_tools` | Advanced tools | Firefox |
+| `advanced_tools` | Advanced tools | Firefox, Filebrowser |
 
 
 ## Quick start

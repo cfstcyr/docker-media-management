@@ -92,6 +92,11 @@ services:
       file: ./docker/tools.yml
       service: calibre
 
+  filebrowser:
+    extends:
+      file: ./docker/tools.yml
+      service: filebrowser
+
   watchtower:
     extends:
       file: ./docker/tools.yml

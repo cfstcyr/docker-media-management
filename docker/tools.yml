@@ -136,6 +136,44 @@ services:
       - homepage.weight=1
     restart: unless-stopped
 
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    profile:
+      - advanced_tools
+    entrypoint: [
+      "/bin/sh",
+      "-c",
+      "
+        cp /config/templates/filebrowser.db /database/filebrowser.db
+        && cp /config/templates/settings.json /config/settings.json
+        && /init
+      "
+    ]
+    environment:
+      - PUID=${USER_ID:-1000}
+      - PGID=${GROUP_ID:-1000}
+      - TZ=${TIMEZONE:-Etc/UTC}
+    volumes:
+      - ../config/filebrowser:/config
+      - ../config/filebrowser:/database
+      - ${LIBRARY_MOVIES_PATH:-~/Media Library/Movies}:/srv/Movies:ro
+      - ${LIBRARY_TVSHOWS_PATH:-~/Media Library/TV Shows}:/srv/TV Shows:ro
+      - ${LIBRARY_BOOKS_PATH:-~/Media Library/Books}:/srv/Books:ro
+      - ${LIBRARY_DOWNLOADS_PATH:-~/Media Library/Download}:/srv/Download:ro
+    ports:
+      - ${FILEBROWSER_PORT:-6930}:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filebrowser.rule=Host(`${FILEBROWSER_SUBDOMAIN:-filebrowser.media}.${DOMAIN:-localhost}`)"
+      - "traefik.http.services.filebrowser.loadbalancer.server.port=80"
+      - homepage.group=Tools
+      - homepage.name=Filebrowser
+      - homepage.icon=filebrowser.png
+      - homepage.href=http://${FILEBROWSER_SUBDOMAIN:-filebrowser.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.description=File manager
+      - homepage.weight=1
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
