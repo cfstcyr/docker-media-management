@@ -404,7 +404,7 @@ You can now access the applications. The default URL is http://media.localhost. 
 2. Follow setup instructions.
     1. Configure Plex
         1. Enter the following information:
-            - `Hostname`: `vpn`
+            - `Hostname`: `plex`
             - `Port`: `32400`
             - `Use Secure Connection`: `false`
             - `Remote Server`: `false`
