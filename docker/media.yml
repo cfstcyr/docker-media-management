@@ -4,12 +4,12 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
-    network_mode: service:vpn
     environment:
       - PUID=${USER_ID:-1000}
       - PGID=${GROUP_ID:-1000}
       - TZ=${TIMEZONE:-Etc/UTC}
       - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ../config/plex:/config
       - ${LIBRARY_TV_PATH:-~/Media Library/TV}:/tv

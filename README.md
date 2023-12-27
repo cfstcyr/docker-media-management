@@ -237,7 +237,28 @@ You can now access the applications. The default URL is http://media.localhost. 
 
 #### Plex
 
-Go to `https://plex.media.localhost` and follow the instructions.
+1. Go to `https://plex.media.localhost`.
+2. Claim the server:
+    - If the page automatically starts the claiming process, follow the setup instructions.
+    - If the Plex app starts and you don't see the server:
+        1. Visit https://www.plex.tv/claim/ and copy the code
+        2. Add the `PLEX_CLAIM` variable in the `.env` file with your code
+        3. Rebuild the container using the `make` command.
+        4. Go to `https://plex.media.localhost` and follow the setup instructions.
+3. Setup library scan:
+    1. Go to `Settings` > `Library`
+    2. Turn on `Scan my library automatically` and `Run a partial scan when changes are detected`
+4. Create libraries:
+    1. Go to `Settings` > `Libraries` > `Add Library`
+    2. Select the library type
+    3. Enter the following information:
+        - `Name`: `Movies` or `TV Shows`
+        - `Folder`: `/movies` or `/tv`
+        - `Advanced`
+            - `Scanner`: `Plex Movie Scanner` or `Plex Series Scanner`
+            - `Agent`: `Plex Movie` or `TheTVDB`
+    4. Click on `Add`
+
 
 #### Radarr, Sonarr
 
@@ -253,13 +274,7 @@ Go to `https://plex.media.localhost` and follow the instructions.
     3. Enter the following information:
         - `Host`: `localhost`
         - `Port`: `9091`
-4. Connect to Plex:
-    1. Go to `Settings` > `Connect` > `Add Connection`
-    2. Select `Plex Media Server`
-    3. Enter the following information:
-        - `host`: `localhost`
-        - `port`: `32400`
-5. Get the API key:
+4. Get the API key:
     1. Go to `Settings` > `General`
     2. Copy the API key
     3. Paste the API key in the `.env` file
