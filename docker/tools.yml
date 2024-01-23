@@ -12,8 +12,10 @@ services:
       - "--api.insecure=true"
       - "--ping=true"
       - '--log=true'
-      - '--log.level=DEBUG'
+      - '--log.level=INFO'
       - '--log.filepath=/config/traefik.log'
+      - --providers.file.directory=/config/
+      - --providers.file.watch=true
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - '--global.sendAnonymousUsage=false'
@@ -21,12 +23,8 @@ services:
       - '--entryPoints.http.address=:80/tcp'
       - '--entryPoints.http.http.redirections.entryPoint.to=https'
       - '--entryPoints.http.http.redirections.entryPoint.scheme=https'
-      # - '--entryPoints.http.forwardedHeaders.insecure=false'
-      # - '--entryPoints.http.proxyProtocol.insecure=false'
       - '--entryPoints.https=true'
       - '--entryPoints.https.address=:443/tcp'
-      # - '--entryPoints.https.forwardedHeaders.insecure=false'
-      # - '--entryPoints.https.proxyProtocol.insecure=false'
     ports:
       - ${TRAEFIK_PORT:-80}:80
       - ${TRAEFIK_SECURE_PORT:-443}:443
