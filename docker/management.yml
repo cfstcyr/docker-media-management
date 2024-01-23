@@ -19,6 +19,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`${RADARR_SUBDOMAIN:-radarr.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      - 'traefik.http.routers.radarr.middlewares=authelia@docker'
+      - 'traefik.http.routers.radarr.tls=true'
       - homepage.group=Management
       - homepage.name=Radarr
       - homepage.icon=radarr.png
@@ -48,6 +50,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`${SONARR_SUBDOMAIN:-sonarr.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - 'traefik.http.routers.sonarr.middlewares=authelia@docker'
+      - 'traefik.http.routers.sonarr.tls=true'
       - homepage.group=Management
       - homepage.name=Sonarr
       - homepage.icon=sonarr.png
@@ -79,6 +83,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.readarr.rule=Host(`${READARR_SUBDOMAIN:-readarr.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.readarr.loadbalancer.server.port=8787"
+      - 'traefik.http.routers.readarr.middlewares=authelia@docker'
+      - 'traefik.http.routers.readarr.tls=true'
       - homepage.group=Management
       - homepage.name=Readarr
       - homepage.icon=readarr.png
@@ -106,6 +112,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.prowlarr.rule=Host(`${PROWLARR_SUBDOMAIN:-prowlarr.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+      - 'traefik.http.routers.prowlarr.middlewares=authelia@docker'
+      - 'traefik.http.routers.prowlarr.tls=true'
       - homepage.group=Management
       - homepage.name=Prowlarr
       - homepage.icon=prowlarr.png
@@ -132,6 +140,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.overseerr.rule=Host(`${OVERSEERR_SUBDOMAIN:-overseerr.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.overseerr.loadbalancer.server.port=5055"
+      - 'traefik.http.routers.overseerr.middlewares=authelia@docker'
+      - 'traefik.http.routers.overseerr.tls=true'
       - homepage.group=Management
       - homepage.name=Overseerr
       - homepage.icon=overseerr.png

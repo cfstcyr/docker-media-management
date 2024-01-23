@@ -4,21 +4,42 @@ services:
   traefik:
     image: traefik:v2.5
     container_name: traefik
+    depends_on: 
+      - authelia
     command:
+      - '--api=true'
+      - '--api.dashboard=true'
       - "--api.insecure=true"
       - "--ping=true"
+      - '--log=true'
+      - '--log.level=DEBUG'
+      - '--log.filepath=/config/traefik.log'
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
+      - '--global.sendAnonymousUsage=false'
+      - '--entryPoints.http=true'
+      - '--entryPoints.http.address=:80/tcp'
+      - '--entryPoints.http.http.redirections.entryPoint.to=https'
+      - '--entryPoints.http.http.redirections.entryPoint.scheme=https'
+      # - '--entryPoints.http.forwardedHeaders.insecure=false'
+      # - '--entryPoints.http.proxyProtocol.insecure=false'
+      - '--entryPoints.https=true'
+      - '--entryPoints.https.address=:443/tcp'
+      # - '--entryPoints.https.forwardedHeaders.insecure=false'
+      # - '--entryPoints.https.proxyProtocol.insecure=false'
     ports:
       - ${TRAEFIK_PORT:-80}:80
+      - ${TRAEFIK_SECURE_PORT:-443}:443
       - ${TRAEFIK_DASHBOARD_PORT:-8080}:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ../config/traefik:/config
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_DASHBOARD_SUBDOMAIN:-traefik.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080"
+      - 'traefik.http.routers.traefik-dashboard.middlewares=authelia@docker'
+      - 'traefik.http.routers.traefik-dashboard.tls=true'
       - homepage.group=Tools
       - homepage.name=Traefik
       - homepage.icon=traefik.png
@@ -31,6 +52,37 @@ services:
       test: [ "CMD", "traefik", "healthcheck", "--ping" ]
       interval: 5s
       retries: 10
+
+  authelia:
+    container_name: authelia
+    image: authelia/authelia
+    restart: unless-stopped
+    expose:
+      - 9091
+    volumes:
+      - ${PWD}/config/authelia/config:/config
+    environment:
+      TZ: "UTC"
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.authelia.rule=Host(`${AUTH_SUBDOMAIN:-auth.media}.${DOMAIN:-localhost}`)'
+      - "traefik.http.services.authelia.loadbalancer.server.port=9091"
+      - 'traefik.http.routers.authelia.entryPoints=https'
+      - 'traefik.http.routers.authelia.tls=true'
+      - 'traefik.http.middlewares.authelia.forwardAuth.address=http://authelia:9091/api/verify?rd=https://${AUTH_SUBDOMAIN:-auth.media}.${DOMAIN:-localhost}'
+      - 'traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader=true'
+      - 'traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email'
+      - homepage.group=Tools
+      - homepage.name=Logout
+      - homepage.href=http://${AUTH_SUBDOMAIN:-auth.media}.${DOMAIN:-localhost}:${TRAEFIK_PORT:-80}
+      - homepage.description=Authentication management
+      - homepage.weight=1
+
+  redis:
+    container_name: redis
+    image: redis:4.0-alpine
+    ports:
+      - "6379:6379"
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -47,6 +99,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.rule=Host(`${HOME_SUBDOMAIN:-media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+      - 'traefik.http.routers.homepage.middlewares=authelia@docker'
+      - 'traefik.http.routers.homepage.tls=true'
     restart: unless-stopped
 
   transmission:
@@ -67,6 +121,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.transmission.rule=Host(`${TRANSMISSION_SUBDOMAIN:-download.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+      - 'traefik.http.routers.transmission.middlewares=authelia@docker'
+      - 'traefik.http.routers.transmission.tls=true'
       - homepage.group=Tools
       - homepage.name=Transmission
       - homepage.icon=transmission.png
@@ -98,6 +154,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.firefox.rule=Host(`${FIREFOX_SUBDOMAIN:-browser.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.firefox.loadbalancer.server.port=5800"
+      - 'traefik.http.routers.firefox.middlewares=authelia@docker'
+      - 'traefik.http.routers.firefox.tls=true'
       - homepage.group=Tools
       - homepage.name=Firefox
       - homepage.icon=firefox.png
@@ -128,6 +186,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.calibre.rule=Host(`${CALIBRE_SUBDOMAIN:-calibre.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.calibre.loadbalancer.server.port=8080"
+      - 'traefik.http.routers.calibre.middlewares=authelia@docker'
+      - 'traefik.http.routers.calibre.tls=true'
       - homepage.group=Tools
       - homepage.name=Calibre
       - homepage.icon=calibre.png
@@ -167,6 +227,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.filebrowser.rule=Host(`${FILEBROWSER_SUBDOMAIN:-filebrowser.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.filebrowser.loadbalancer.server.port=80"
+      - 'traefik.http.routers.filebrowser.middlewares=authelia@docker'
+      - 'traefik.http.routers.filebrowser.tls=true'
       - homepage.group=Tools
       - homepage.name=Filebrowser
       - homepage.icon=filebrowser.png

@@ -18,6 +18,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plex.rule=Host(`${PLEX_SUBDOMAIN:-plex.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
+      - 'traefik.http.routers.plex.middlewares=authelia@docker'
+      - 'traefik.http.routers.plex.tls=true'
       - homepage.group=Media
       - homepage.name=Plex
       - homepage.icon=plex.png
@@ -48,6 +50,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.calibre-web.rule=Host(`${CALIBRE_WEB_SUBDOMAIN:-calibre-web.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.calibre-web.loadbalancer.server.port=8083"
+      - 'traefik.http.routers.calibre-web.middlewares=authelia@docker'
+      - 'traefik.http.routers.calibre-web.tls=true'
       - homepage.group=Media
       - homepage.name=Calibre Web
       - homepage.icon=calibre-web.png
@@ -73,6 +77,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.tautulli.rule=Host(`${TAUTULLI_SUBDOMAIN:-tautulli.media}.${DOMAIN:-localhost}`)"
       - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
+      - 'traefik.http.routers.tautulli.middlewares=authelia@docker'
+      - 'traefik.http.routers.tautulli.tls=true'
       - homepage.group=Media
       - homepage.name=Tautulli
       - homepage.icon=tautulli.png
