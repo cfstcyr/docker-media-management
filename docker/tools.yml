@@ -58,7 +58,7 @@ services:
     expose:
       - 9091
     volumes:
-      - ${PWD}/config/authelia/config:/config
+      - ${PWD}/config/authelia:/config
     environment:
       TZ: "UTC"
     labels:
