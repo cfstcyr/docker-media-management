@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   # ========================
   # VPN
@@ -82,16 +80,6 @@ services:
       file: ./docker/tools.yml
       service: traefik
 
-  authelia:
-    extends:
-      file: ./docker/tools.yml
-      service: authelia
-
-  redis:
-    extends:
-      file: ./docker/tools.yml
-      service: redis
-
   transmission:
     extends:
       file: ./docker/tools.yml
@@ -101,11 +89,6 @@ services:
     extends:
       file: ./docker/tools.yml
       service: calibre
-
-  filebrowser:
-    extends:
-      file: ./docker/tools.yml
-      service: filebrowser
 
   watchtower:
     extends:

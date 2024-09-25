@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 services:
   vpn:
@@ -25,8 +25,10 @@ services:
     volumes:
       - ../config/gluetun:/gluetun
     environment:
-      - VPN_SERVICE_PROVIDER=windscribe
-      - VPN_TYPE=wireguard
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
+      - VPN_TYPE=${VPN_TYPE}
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}

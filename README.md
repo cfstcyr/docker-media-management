@@ -108,8 +108,18 @@ The `.env` file contains the environment variables for the containers.
 
 #### VPN variables
 
+To setup the VPN, you must have a VPN provider. Example of providers are [Proton VPN](https://protonvpn.com/) or [Windscribe](https://windscribe.com/).
+
+> **Note**: Not all variables are required even if they have a `*`. The required variables depend on the VPN provider and the VPN type.
+
+Refer to the [Gluetun documentation](https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers) for how to connect your VPN provider.
+
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
+| `VPN_PROVIDER`* | VPN provider | `""` |
+| `VPN_TYPE`* | VPN type | `""` |
+| `OPEN_VPN_USER`* | OpenVPN username | `""` |
+| `OPEN_VPN_PASSWORD`* | OpenVPN password | `""` |
 | `WIREGUARD_PRIVATE_KEY`* | Wireguard private key | `""` |
 | `WIREGUARD_PUBLIC_KEY`* | Wireguard public key | `""` |
 | `WIREGUARD_ENDPOINT`* | Wireguard endpoint | `""` |
@@ -183,6 +193,8 @@ The `.env` file contains the environment variables for the containers.
 
 Profiles are defined in the `docker-compose.yml` file. They are used to define which applications to start which enables to have optional applications. Use the variable `COMPOSE_PROFILES` to define which profiles to use.
 
+> **Note**: It is recommended to start without profiles and add them later.
+
 | Profile | Description | Applications |
 | ------- | ----------- | ------------ |
 | `book` | Book management | Calibre, Calibre Web, Readarr |
@@ -213,9 +225,13 @@ cp .env.template .env
 
 Some variables are required to start the containers (e.g. WireGuard keys). Those variables are marked with a `*` in the [variables list](#variables-list).
 
+Make sure the VPN variables are correctly configured to your provider. Otherwise, the services will not have access to internet.
+
 #### 2.2. Select the profiles
 
 Some applications are optional. To enable them, add the profiles in the `COMPOSE_PROFILES` variable. The profiles are separated by spaces. See the [profiles list](#profiles-list) for more information.
+
+> **Note**: It is recommended to start without profiles and add them later.
 
 ### 3. Start the containers
 
@@ -228,8 +244,10 @@ make
 or
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
+
+If some optional variables were left blank in the `.env` file, you will see warnings in the logs. You can ignore them, default values are used in the applications.
 
 You can now access the applications. The default URL is http://media.localhost. This opens the home page with all the apps.
 
